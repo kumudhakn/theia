@@ -44,7 +44,9 @@ import {
     Command,
     TextEdit,
     ReferenceContext,
-    Location
+    Location,
+    FileWatcherSubscriberOptions,
+    FileChangeEvent
 } from './model';
 
 export interface PluginInitData {
@@ -324,11 +326,14 @@ export interface WorkspaceMain {
     $registerTextDocumentContentProvider(scheme: string): Promise<void>;
     $unregisterTextDocumentContentProvider(scheme: string): void;
     $onTextDocumentContentChange(uri: string, content: string): void;
+    $registerFileSystemWatcher(options: FileWatcherSubscriberOptions): Promise<string>;
+    $unregisterFileSystemWatcher(watcherId: string): Promise<void>;
 }
 
 export interface WorkspaceExt {
     $onWorkspaceFoldersChanged(event: theia.WorkspaceFoldersChangeEvent): void;
     $provideTextDocumentContent(uri: string): Promise<string | undefined>;
+    $fileChanged(event: FileChangeEvent): void;
 }
 
 export interface DialogsMain {

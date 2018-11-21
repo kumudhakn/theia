@@ -25,4 +25,8 @@ export class ElectronWindowService extends DefaultWindowService {
         ipcRenderer.send('create-new-window', url);
     }
 
+    openExternal(url: string): void {
+        ipcRenderer.send('open-external', url);
+    }
+
 }
